@@ -1,4 +1,6 @@
 import Strategies.inside_only
+import Strategies.triple_lux
+import Strategies.double_single
 from typing import List
 import random
 
@@ -36,6 +38,8 @@ n_rolls = 0
 rules = [table_minimum,field]
 players = []
 players.append( Strategies.inside_only.InsideOnly(rules) )
+players.append( Strategies.triple_lux.TripleLux(rules) )
+players.append( Strategies.double_single.DoubleSingle(rules) )
 ################################
 
 
@@ -73,6 +77,10 @@ while shooter < n_shooters:
 		elif roll == button:
 			call = 'come_out'
 
+
+		# place bet
+		elif roll in place:
+			call = "place "+str(roll)
 		# anything else
 		else:
 			call = str(roll)
@@ -89,3 +97,10 @@ print("Final Coffers:")
 for plr in players:
 	print( "{0:15s} - {1:5d}".format(plr.name,plr.coffer) )
 
+print()
+print("{0:15s} - {1:5d}".format("Total Rolls",n_rolls))
+
+with open("outcomes.log","a") as wrtr:
+	for plr in players:
+		wrtr.write("{:6d}".format(plr.coffer))
+	wrtr.write('\n')

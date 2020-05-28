@@ -16,7 +16,7 @@ class InsideOnly:
 		self.place_rate = {4:9,5:7,6:7,8:7,9:7,10:9}
 
 		self.name   = 'Inside Only'
-		self.coffer = 200
+		self.coffer = 500
 		
 		self.place_bets = [0]*12
 		self.pass_line  = 0
@@ -43,7 +43,7 @@ class InsideOnly:
 
 			if pb == 6 or pb == 8:
 				self.coffer -= int(self.table_min*6/5)
-			else: # 4,9
+			else: # 5,9
 				self.coffer -= self.table_min
 			self.place_bets[pb] = 1
 
