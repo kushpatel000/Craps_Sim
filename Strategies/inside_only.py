@@ -49,6 +49,7 @@ class InsideOnly:
 
 
 	def update(self,call,button,dice) -> None:
+		roll = dice[0]+dice[1]
 		if call == '7_11':
 			self.coffer += self.pass_line
 		elif call == 'craps':
@@ -65,9 +66,9 @@ class InsideOnly:
 			self.coffer += 2*self.pass_line
 			self.pass_line = 0
 
-			rate = self.odds_rate[button]+1
+			rate = self.odds_rate[roll]+1
 			self.coffer += int(self.table_min*self.pass_odds*rate)
 			self.pass_odds = 0
-		else:
-			rate = self.place_rate[button]
-			self.coffer += self.place_bets[button]*rate
+		elif call[:5] == 'place':
+			rate = self.place_rate[roll]
+			self.coffer += self.place_bets[roll]*rate
